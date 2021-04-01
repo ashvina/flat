@@ -37,9 +37,9 @@ async function run(): Promise<void> {
   core.endGroup()
 
   core.debug(`*** postprocess is: ${config.postprocess}`)
-  execSync('pwd')
-  execSync('ls')
-  execSync('ls ..')
+  core.debug(execSync('pwd').toString())
+  core.debug(execSync('ls').toString())
+  core.debug(execSync('ls ..').toString())
   if (config.postprocess) {
     core.startGroup('Postprocess')
     try {
