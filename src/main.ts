@@ -40,6 +40,7 @@ async function run(): Promise<void> {
   core.debug(execSync('pwd').toString())
   core.debug(execSync('ls').toString())
   core.debug(execSync('ls ..').toString())
+  core.debug(execSync('ls ../workflow').toString())
   if (config.postprocess) {
     core.startGroup('Postprocess')
     try {
