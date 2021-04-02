@@ -54,8 +54,13 @@ async function run(): Promise<void> {
   //   ).toString()
   // )
 
+  core.debug(`*** __filename: ${__filename}`)
+
   core.debug(
-    `*** ls __filename path: ${join(__filename, '../postprocess/shim.ts')}`
+    `*** __filename/../postprocess/shim.ts: ${join(
+      __filename,
+      '../postprocess/shim.ts'
+    )}`
   )
 
   core.debug(`*** GITHUB_ACTION: ${process.env['GITHUB_ACTION']}`)
