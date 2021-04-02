@@ -38,25 +38,24 @@ async function run(): Promise<void> {
 
   core.debug(`*** postprocess is: ${config.postprocess}`)
 
-  core.debug('*** ls')
+  core.debug('*** pwd')
   core.debug(execSync('pwd').toString())
 
   core.debug('*** ls')
   core.debug(execSync('ls').toString())
 
-  core.debug('*** ls ..')
-  core.debug(execSync('ls ..').toString())
-
-  core.debug('*** ls ../..')
-  core.debug(execSync('ls ../..').toString())
+  core.debug('*** ls ~/work/_actions/githubocto/flat')
+  core.debug(execSync('ls ~/work/_actions/githubocto/flat').toString())
 
   if (config.postprocess) {
     core.startGroup('Postprocess')
     try {
-      // TODO: is /dist the CWD at runtime?
-      filename = execSync(
-        `deno run -A ./postprocessing_shim.ts ${config.postprocess} ${filename}`
-      ).toString()
+      // TODO: where is the shim at runtime?
+      // ~/work/_actions/githubocto/flat/postprocessing/
+      // /home/runner/work/_actions/githubocto/flat/postprocessing/
+      // filename = execSync(
+      //   `deno run -A ~/work/_actions/githubocto/flat/postprocessing/postprocess/postprocess_shim.ts ${config.postprocess} ${filename}`
+      // ).toString()
     } catch (error) {
       core.setFailed(error)
     }
@@ -64,7 +63,7 @@ async function run(): Promise<void> {
   }
 
   core.startGroup('Calculating diffstat')
-  await exec('git', ['add', '-A']) // TODO: should be filename instead of -A
+  await exec('git', ['add', '-A']) // TODO: should be filename instead of -A, but it fails otherwise
   const bytes = await diff()
   core.setOutput('delta_bytes', bytes)
   core.endGroup()
