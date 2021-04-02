@@ -44,8 +44,12 @@ async function run(): Promise<void> {
   core.debug('*** ls')
   core.debug(execSync('ls').toString())
 
-  core.debug('*** ls ~/work/_actions/githubocto/flat')
-  core.debug(execSync('ls ~/work/_actions/githubocto/flat').toString())
+  core.debug('*** ls ~/work/_actions/githubocto/flat/postprocessing/src')
+  core.debug(
+    execSync('ls ~/work/_actions/githubocto/flat/postprocessing/src').toString()
+  )
+
+  core.debug(`*** GITHUB_ACTION: ${process.env['GITHUB_ACTION']}`)
 
   if (config.postprocess) {
     core.startGroup('Postprocess')
@@ -53,9 +57,10 @@ async function run(): Promise<void> {
       // TODO: where is the shim at runtime?
       // ~/work/_actions/githubocto/flat/postprocessing/
       // /home/runner/work/_actions/githubocto/flat/postprocessing/
-      // filename = execSync(
-      //   `deno run -A ~/work/_actions/githubocto/flat/postprocessing/postprocess/postprocess_shim.ts ${config.postprocess} ${filename}`
-      // ).toString()
+      // TODO: `Postprocessing` needs to be a branch identifier, how do we get this at runtime?
+      filename = execSync(
+        `deno run -A ~/work/_actions/githubocto/flat/postprocessing/postprocess/postprocess_shim.ts ${config.postprocess} ${filename}`
+      ).toString()
     } catch (error) {
       core.setFailed(error)
     }
