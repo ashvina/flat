@@ -42,17 +42,17 @@ async function run(): Promise<void> {
   core.debug('*** pwd')
   core.debug(execSync('pwd').toString())
 
-  core.debug('*** ls')
-  core.debug(execSync('ls').toString())
+  // core.debug('*** ls')
+  // core.debug(execSync('ls').toString())
 
-  core.debug(
-    '*** ls ~/work/_actions/githubocto/flat/postprocessing/postprocess'
-  )
-  core.debug(
-    execSync(
-      'ls ~/work/_actions/githubocto/flat/postprocessing/postprocess'
-    ).toString()
-  )
+  // core.debug(
+  //   '*** ls ~/work/_actions/githubocto/flat/postprocessing/postprocess'
+  // )
+  // core.debug(
+  //   execSync(
+  //     'ls ~/work/_actions/githubocto/flat/postprocessing/postprocess'
+  //   ).toString()
+  // )
 
   core.debug(
     `*** ls __filename path: ${join(__filename, '../postprocess/shim.ts')}`
